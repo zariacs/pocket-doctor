@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Patient {
+  id           Int           @id @default(autoincrement())
+  fname        String        @db.VarChar(256)
+  lname        String        @db.VarChar(256)
+  email        String        @unique @db.VarChar(256)
+  appointments Appointment[]
+  allergies    String?
+  medications  String?
+  address      String?
+
+  @@map(name: "patients")
+}
+
+model Appointment {
+  id         Int      @id @default(autoincrement())
+  patient    Patient  @relation(fields: [patientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  patientId  Int      @map(name: "patiend_id")
+  doctor     Doctor   @relation(fields: [doctorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  doctorId   Int      @map(name: "doctor_id")
+  createdAt  DateTime @default(now()) @map(name: "created_at")
+  approved   Boolean  @default(false)
+  approvedAt DateTime @updatedAt @map(name: "approved_at")
+
+  @@map(name: "appointments")
+}
+
+model Doctor {
+  id           Int           @id @default(autoincrement())
+  fname        String        @db.VarChar(256)
+  lname        String        @db.VarChar(256)
+  appointments Appointment[]
+
+  @@map(name: "doctors")
+}
