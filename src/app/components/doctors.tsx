@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 type Doctor = {
-  // Specified type here and in initialization of doctors to satisfy TypeScript during list element creation via object property referencing
+  // Specified type here and in initialization of doctors to satisfy TypeScript during list element creation which requiers object property references
   id: number;
   fname: string;
   lname: string;
