@@ -1,4 +1,4 @@
-import Create from "./create";
+import Create from "../patients/new/create";
 
 export default async function Page() {
   return (
