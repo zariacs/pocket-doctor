@@ -7,7 +7,9 @@ export default async function WelcomeNewPatientPage() {
       <NewPatient />
       <h1>Welcome</h1>
       <Link href="/components/appointments/">
-        <button>Make New Appointment</button>
+        <button type="button" className="btn btn-dark">
+          Make a New Appointment
+        </button>
       </Link>
     </>
   );

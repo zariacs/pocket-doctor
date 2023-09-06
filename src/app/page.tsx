@@ -7,10 +7,12 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main>
-      <h1>HOME PAGE</h1>
-      <Doctors />
+      <h1>Welcome</h1>
+      <h4>to your favourite doctor&apos;s office</h4>
       <Link href="/components/appointments/">
-        <button>Make New Appointment</button>
+        <button type="button" className="btn btn-dark">
+          Get Started
+        </button>
       </Link>
     </main>
   );

@@ -1,18 +1,7 @@
 "use client";
-import { currentUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 
 export default function PatientProfile() {
-  //   type Patient = {
-  //     id: string;
-  //     fname: string;
-  //     lname: string;
-  //     email: string;
-  //     allergies: string;
-  //     medications: string;
-  //     address: string;
-  //   };
-
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
   const [allergies, setAllergies] = useState("");
@@ -30,8 +19,8 @@ export default function PatientProfile() {
       setAllergies(patient.allergies);
       setMedications(patient.medications);
       setAddress(patient.address);
-      setFName(patient.fName);
-      setLName(patient.lName);
+      setFName(patient.fname);
+      setLName(patient.lname);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -45,6 +34,8 @@ export default function PatientProfile() {
           allergies: allergies,
           medications: medications,
           address: address,
+          // All IP address related code has been commented out for now
+          // ip: getClientIp(),
         }),
       });
       if (!res.ok) {
@@ -56,6 +47,17 @@ export default function PatientProfile() {
     }
   }
 
+  // All IP address related code has been commented out for now
+  // async function getClientIp() {
+  //   const ip = await fetch("https://api.ipify.org?format=json", {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .catch((error) => console.error(error));
+
+  //   return ip || "0.0.0.0";
+  // }
+
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -63,30 +65,48 @@ export default function PatientProfile() {
   return (
     <>
       <h1>My Profile</h1>
-      <h3>First name:</h3>
-      {fName}
-      <h3>Last name:</h3>
-      {lName}
-      <h3>Allergies:</h3>
-      <input
-        key="allergies"
-        type="text"
-        defaultValue={allergies}
-        onChange={(event) => setAllergies(event.target.value)}
-      />
-      <h3>Medications:</h3>
-      <input
-        type="text"
-        defaultValue={medications}
-        onChange={(event) => setMedications(event.target.value)}
-      />
-      <h3>Address:</h3>
-      <input
-        type="text"
-        defaultValue={address}
-        onChange={(event) => setAddress(event.target.value)}
-      />
-      <button onClick={saveProfile}>Save</button>
+      <div className="profile-group">
+        <h6>
+          {fName} {lName}
+        </h6>
+      </div>
+      <div className="profile-group">
+        <h6>Are you allergic to anything?</h6>
+        <input
+          key="allergies"
+          type="text"
+          defaultValue={allergies}
+          onChange={(event) => setAllergies(event.target.value)}
+          className="form-control"
+        />
+      </div>
+      <div className="profile-group">
+        <h6>Medications that you&apos;re currently taking:</h6>
+        <input
+          type="text"
+          defaultValue={medications}
+          onChange={(event) => setMedications(event.target.value)}
+          className="form-control"
+        />
+      </div>
+      <div className="profile-group">
+        <h6>Address:</h6>
+        <input
+          type="text"
+          defaultValue={address}
+          onChange={(event) => setAddress(event.target.value)}
+          className="form-control"
+        />
+      </div>
+      <div className="button">
+        <button
+          onClick={saveProfile}
+          type="button"
+          className="btn btn-dark btns"
+        >
+          Save
+        </button>
+      </div>
     </>
   );
 }

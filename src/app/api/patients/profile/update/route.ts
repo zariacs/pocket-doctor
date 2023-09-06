@@ -1,8 +1,10 @@
 import prisma from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs";
+import { NextApiRequest } from "next";
 import { NextRequest, NextResponse } from "next/server";
+import requestIp from 'request-ip';
 
-export async function PUT (request:NextRequest) {
+export async function PUT (request:NextRequest, req: NextApiRequest) {
     try {
         // Retrieves current user's id
         const patient = await currentUser();
@@ -15,8 +17,11 @@ export async function PUT (request:NextRequest) {
         const userMedications = await profileData.medications as string;
         const userAddress = await profileData.address as string;
 
-        const userIp = request.ip as string;
-        if (!userIp) throw new Error('No IP address found')
+        // All IP address related code has been commented out for
+        // const detectedIp = requestIp.getClientIp(req);
+        // const userIp = request.ip as string;
+        // const userIp = await profileData.ip as string;
+        // if (!userIp) throw new Error('No IP address found');
 
         // Updates patient profile with new profile data
         const profile = await prisma.patient.update({
@@ -27,11 +32,11 @@ export async function PUT (request:NextRequest) {
                 allergies: userAllergies,
                 medications: userMedications,
                 address: userAddress,
-                ip: userIp,
+                // ip: userIp,
             }
         })
         // Returns profile along with new resource created status
-        return NextResponse.json(profile, { status: 204 });
+        return NextResponse.json(profile, { status: 201 });
     } catch (error) {
       console.error(error);
       return NextResponse.json({ error: 'Error updating profile' }, { status: 500 });

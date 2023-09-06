@@ -29,17 +29,27 @@ export default function AppointmentHistory() {
     fetchAppointments();
   }, []);
 
-  return (
-    <>
-      <h1>Appointment History</h1>
-      <ul>
-        {appointments.map((appointment) => (
-          <li key={appointment.id}>
-            {new Date(appointment.date).toDateString()}{" "}
-            {new Date(appointment.time).toLocaleTimeString()}
-          </li>
-        ))}
-      </ul>
-    </>
-  );
+  if (appointments.length > 0) {
+    return (
+      <>
+        <h3>Appointment History</h3>
+        <ul className="list-group">
+          {appointments.map((appointment) => (
+            <li key={appointment.id} className="list-group-item">
+              {new Date(appointment.date).toDateString()}
+              {" - "}
+              {new Date(appointment.time).toLocaleTimeString()}
+            </li>
+          ))}
+        </ul>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <h3>Appointment History</h3>
+        <p>Your appointments will go here</p>
+      </>
+    );
+  }
 }

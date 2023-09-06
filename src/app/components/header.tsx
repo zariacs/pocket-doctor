@@ -1,4 +1,5 @@
 import { SignedIn, UserButton, SignedOut, SignInButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 const header = () => {
   return (
@@ -9,7 +10,9 @@ const header = () => {
         padding: 30,
       }}
     >
-      <h1>Your Favourite Doctor</h1>
+      <Link href="/" className="header-text">
+        <p className="header-text">Your Favourite Doctor</p>
+      </Link>
       <SignedIn>
         {/* Mount the UserButton component */}
         <UserButton />

@@ -12,8 +12,11 @@ export default async function AppointmentsPage() {
       <section>
         <AppointmentHistory />
       </section>
+
       <section>
-        <PatientProfile />
+        <section>
+          <PatientProfile />
+        </section>
       </section>
     </>
   );
