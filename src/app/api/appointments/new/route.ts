@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
         // Gets current user's ID
         const patient = await currentUser();
         if (!patient) throw new Error('No user found')
-        const patientId = patient?.id;
+        const patientId = patient.id;
 
         // Prepares appointment date and time details
         const aptData = await request.json();
