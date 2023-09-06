@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@clerk/nextjs": "^4.23.3",
+    "@types/react-datepicker": "^4.15.0",
     "prisma": "^5.2.0"
   }
 }
