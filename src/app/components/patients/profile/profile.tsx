@@ -1,3 +1,5 @@
+// Everything to do with the profile/personal information section of the patient dashboard
+
 "use client";
 import { useEffect, useState } from "react";
 
@@ -9,13 +11,16 @@ export default function PatientProfile() {
   const [address, setAddress] = useState("");
 
   async function fetchProfile() {
+    // Retrieves patient information via fetch request
     try {
       const res = await fetch("/api/patients/profile");
+
       if (!res.ok) {
         throw new Error("Network response was not ok");
       }
+
       const patient = await res.json();
-      console.log(patient);
+
       setAllergies(patient.allergies);
       setMedications(patient.medications);
       setAddress(patient.address);

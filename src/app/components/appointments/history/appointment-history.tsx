@@ -25,6 +25,7 @@ export default function AppointmentHistory() {
     }
   }
 
+  // Without useEffect this function call happens a million times and never stops
   useEffect(() => {
     fetchAppointments();
   }, []);
@@ -39,6 +40,7 @@ export default function AppointmentHistory() {
               {new Date(appointment.date).toDateString()}
               {" - "}
               {new Date(appointment.time).toLocaleTimeString()}
+              {/* Want to add the name of the doctor related to the appointment as well */}
             </li>
           ))}
         </ul>
