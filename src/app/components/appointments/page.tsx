@@ -1,19 +1,17 @@
-import Create from "../patients/new/create";
+import AppointmentHistory from "./history/appointment-history";
+import NewAppointment from "./new/new-appointment";
 
-export default async function Page() {
+export default async function AppointmentsPage() {
   return (
     <>
-      <Create></Create>
       <h1>Appointments</h1>
       <section>
         <h2>Make a New Appointment</h2>
-        <form></form>
+        <NewAppointment />
       </section>
       <section>
-        <h2>Pending Appointments</h2>
-      </section>
-      <section>
-        <h2>Previous Appointments</h2>
+        <h2>Appointment History</h2>
+        {/* <AppointmentHistory /> */}
       </section>
     </>
   );

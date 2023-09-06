@@ -1,11 +1,10 @@
 import Link from "next/link";
-import Create from "./create";
+import NewPatient from "./create";
 
-export default function WelcomeNewPatientPage() {
+export default async function WelcomeNewPatientPage() {
   return (
     <>
-      <Create />
-
+      <NewPatient />
       <h1>Welcome</h1>
       <Link href="/components/appointments/">
         <button>Make New Appointment</button>

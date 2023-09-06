@@ -4,13 +4,13 @@
 
 import prisma from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST() {
+export async function POST(request: NextRequest) {
     const newUser = await currentUser();
     if (!newUser) throw new Error('No user found')
 
-    const newEmail = newUser.emailAddresses[0].emailAddress;
+    const newEmail = newUser.emailAddresses[0].emailAddress as string;
     const newId = newUser.id as string;
     const newFirstName = newUser.firstName as string;
     const newLastName = newUser.lastName as string;

@@ -4,35 +4,33 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Patient {
   id          String  @id
   fname       String
   lname       String
-  email       String  @unique // prevents multiple patients with the same email address, redundant due to Clerk
-  allergies   String? // these optional fields are empty at user registration
+  email       String
+  allergies   String?
   medications String?
   address     String?
 
-  @@map(name: "patients")
+  @@map("patients")
 }
 
 model Appointment {
   id        Int      @id @default(autoincrement())
-  patientId String   @map(name: "patiend_id")
-  doctorId  Int      @default(1) @map(name: "doctor_id")
+  patientId String   @map("patiend_id")
+  doctorId  Int      @default(1) @map("doctor_id")
   date      DateTime @db.Date
-  time      DateTime @db.Time()
-  createdAt DateTime @default(now()) @map(name: "created_at")
+  time      DateTime @db.Time(6)
+  createdAt DateTime @default(now()) @map("created_at")
   approved  Boolean  @default(true)
-  updatedAt DateTime @updatedAt @map(name: "approved_at")
-  // updatedAt is intended to show when a doctor declines/approves/otherwise updates an appointment 
-  // Patients are currently unable to update an appointment
+  updatedAt DateTime @updatedAt @map("approved_at")
 
-  @@map(name: "appointments")
+  @@map("appointments")
 }
 
 model Doctor {
@@ -40,5 +38,5 @@ model Doctor {
   fname String @db.VarChar(256)
   lname String @db.VarChar(256)
 
-  @@map(name: "doctors")
+  @@map("doctors")
 }
