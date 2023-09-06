@@ -13,6 +13,7 @@ model Patient {
   fname       String
   lname       String
   email       String
+  ip          String?
   allergies   String?
   medications String?
   address     String?
