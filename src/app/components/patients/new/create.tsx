@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 export default function NewPatient() {
   async function createPatient() {
-    console.log("We've reached here");
     try {
       const response = await fetch("/api/patients/new", {
         method: "POST",
