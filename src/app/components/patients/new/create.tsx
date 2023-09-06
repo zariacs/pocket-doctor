@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 
 export default function NewPatient() {
-  // useEffect(() => {
   async function createPatient() {
     console.log("We've reached here");
     try {
@@ -13,7 +12,7 @@ export default function NewPatient() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      // const data = await response.json(); // keeping this data value for future testing if ever needed
+      const data = await response.json(); // keeping this data value for future testing if ever needed
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -21,8 +20,6 @@ export default function NewPatient() {
   useEffect(() => {
     createPatient();
   }, []);
-  // createPatient();
-  // }, []);
 
-  return <>{/* <button onClick={createPatient}>HEYYYY</button> */}</>;
+  return <></>;
 }
