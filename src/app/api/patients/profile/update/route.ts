@@ -16,6 +16,7 @@ export async function PUT (request:NextRequest) {
         const userAddress = await profileData.address as string;
 
         const userIp = request.ip as string;
+        if (!userIp) throw new Error('No IP address found')
 
         // Updates patient profile with new profile data
         const profile = await prisma.patient.update({
@@ -30,7 +31,7 @@ export async function PUT (request:NextRequest) {
             }
         })
         // Returns profile along with new resource created status
-        return NextResponse.json(profile, { status: 201 });
+        return NextResponse.json(profile, { status: 204 });
     } catch (error) {
       console.error(error);
       return NextResponse.json({ error: 'Error updating profile' }, { status: 500 });
