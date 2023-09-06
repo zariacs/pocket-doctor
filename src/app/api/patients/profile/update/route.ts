@@ -15,6 +15,8 @@ export async function PUT (request:NextRequest) {
         const userMedications = await profileData.medications as string;
         const userAddress = await profileData.address as string;
 
+        const userIp = request.ip as string;
+
         // Updates patient profile with new profile data
         const profile = await prisma.patient.update({
             where: {
@@ -24,6 +26,7 @@ export async function PUT (request:NextRequest) {
                 allergies: userAllergies,
                 medications: userMedications,
                 address: userAddress,
+                ip: userIp,
             }
         })
         // Returns profile along with new resource created status
