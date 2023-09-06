@@ -1,29 +1,33 @@
 "use client";
-import type { Appointment } from "@prisma/client";
 import { useState, useEffect } from "react";
 
 export default function AppointmentHistory() {
   // Gets and displays all appointments related to the current user
+
+  type Appointment = {
+    id: string;
+    date: Date;
+    time: Date;
+    doctorId: string;
+  };
   const [appointments, setAppointments] = useState<Appointment[]>([]);
 
-  useEffect(() => {
-    async function fetchAppointments() {
-      try {
-        const res = await fetch("/api/appointments/history");
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await res.json();
-        setAppointments(data);
-        console.log(appointments);
-        console.log("The type of variable is", typeof appointments);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+  async function fetchAppointments() {
+    try {
+      const res = await fetch("/api/appointments/history");
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
       }
+      const data = await res.json();
+      setAppointments(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
+  }
 
+  useEffect(() => {
     fetchAppointments();
-  });
+  }, []);
 
   return (
     <>
@@ -31,7 +35,8 @@ export default function AppointmentHistory() {
       <ul>
         {appointments.map((appointment) => (
           <li key={appointment.id}>
-            {/* {appointment.date.toString()} {appointment.time.toString()} */}
+            {new Date(appointment.date).toDateString()}{" "}
+            {new Date(appointment.time).toLocaleTimeString()}
           </li>
         ))}
       </ul>
