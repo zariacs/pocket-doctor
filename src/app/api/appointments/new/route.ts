@@ -11,14 +11,14 @@ export async function POST(request: NextRequest) {
 
         // Prepares appointment date and time details
         const aptData = await request.json();
-        const aptDate = aptData.date as Date;
-        const aptTimeSlot = aptData.timeSlot as string;
+        const aptDate = await aptData.date as Date;
+        const aptTime = await aptData.time as Date;
 
         // Create a new appointment in the database
         const appointment = await prisma.appointment.create({
           data: {
             date: aptDate,
-            timeSlot: aptTimeSlot,
+            time: aptTime,
             patientId: patientId
           },
         });
