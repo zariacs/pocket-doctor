@@ -1,4 +1,5 @@
-@tailwind base;
+@import "../styles/dummy.css";
+
 @tailwind components;
 @tailwind utilities;
 
