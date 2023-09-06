@@ -23,7 +23,9 @@ model Patient {
 model Appointment {
   id         Int      @id @default(autoincrement())
   patientId  String   @map(name: "patiend_id")
-  doctorId   Int      @map(name: "doctor_id")
+  doctorId   Int      @default(1) @map(name: "doctor_id")
+  date       DateTime @db.Date
+  timeSlot   String   @db.VarChar(1)
   createdAt  DateTime @default(now()) @map(name: "created_at")
   approved   Boolean  @default(false)
   approvedAt DateTime @updatedAt @map(name: "approved_at")
