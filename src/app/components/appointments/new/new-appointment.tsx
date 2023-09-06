@@ -12,37 +12,6 @@ export default function NewAppointment() {
     setHours(setMinutes(setSeconds(new Date(), 0), 0), 9)
   );
 
-  //   const [aptTime, setaptTime] = useState("");
-  // The time selected by user will be converted to a time slot string as follows:
-  // 9:00 AM - "A"
-  // 11:00 AM - "B"
-  // 1:00 PM - "C"
-  // 3:00 PM - "D"
-  // This conversion will be implemented by naming the key for each time slot button
-  // as the letter it corresponds to, then when a time button is clicked, setting the
-  // time slot (aptTime) to the key of the button selected (where the key is the
-  // corresponding letter/char/string).
-
-  //   useEffect(() => {
-  //     async function createAppointment() {
-  //       try {
-  //         const response = await fetch("/api/appointments/new", {
-  //           method: "POST",
-  //           body: JSON.stringify({ date: aptDate, time: aptTime }),
-  //         });
-  //         if (!response.ok) {
-  //           throw new Error("Network response was not ok");
-  //         }
-  //         const data = await response.json(); // keeping this data value for future testing if ever needed
-  //       } catch (error) {
-  //         console.error("Error fetching data:", error);
-  //       }
-  //     }
-
-  //     createAppointment();
-  //   }),
-  //     [];
-
   async function createAppointment() {
     try {
       const response = await fetch("/api/appointments/new", {
@@ -52,7 +21,7 @@ export default function NewAppointment() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      const data = await response.json(); // keeping this data value for future testing if ever needed
+      const data = await response.json(); // Keeping this data value for future testing if ever needed
     } catch (error) {
       console.error("Error fetching data:", error);
     }
