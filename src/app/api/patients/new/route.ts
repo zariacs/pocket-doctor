@@ -14,13 +14,15 @@ export async function POST(request: NextRequest) {
     const newId = newUser.id as string;
     const newFirstName = newUser.firstName as string;
     const newLastName = newUser.lastName as string;
+    const newIp = request.ip as string;
 
     // used for testing
     console.log('Values being passed to prisma.patient.create():', {
         id: newId,
         email: newEmail,
         fname: newFirstName,
-        lname: newLastName
+        lname: newLastName,
+        ip: newIp,
       });
 
 
@@ -30,6 +32,7 @@ export async function POST(request: NextRequest) {
             fname: newFirstName,
             lname: newLastName,
             email: newEmail,
+            ip: newIp,
         },
       })
     console.log("Created patient:", patient); 
