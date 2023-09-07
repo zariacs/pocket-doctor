@@ -22,14 +22,15 @@ model Patient {
 }
 
 model Appointment {
-  id        Int      @id @default(autoincrement())
-  patientId String   @map("patiend_id")
-  doctorId  Int      @default(1) @map("doctor_id")
-  date      DateTime @db.Date
-  time      DateTime @db.Time(6)
-  createdAt DateTime @default(now()) @map("created_at")
-  approved  Boolean  @default(true)
-  updatedAt DateTime @updatedAt @map("approved_at")
+  id        Int       @id @default(autoincrement())
+  patientId String    @map("patiend_id")
+  doctorId  Int       @default(1) @map("doctor_id")
+  dateTime  DateTime?
+  date      DateTime? @db.Date
+  time      DateTime? @db.Time(6)
+  createdAt DateTime  @default(now()) @map("created_at")
+  approved  Boolean   @default(true)
+  updatedAt DateTime  @updatedAt @map("approved_at")
 
   @@map("appointments")
 }

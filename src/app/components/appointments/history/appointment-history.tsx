@@ -6,8 +6,7 @@ export default function AppointmentHistory() {
 
   type Appointment = {
     id: string;
-    date: Date;
-    time: Date;
+    dateTime: string;
     doctorId: string;
   };
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -36,10 +35,22 @@ export default function AppointmentHistory() {
         <h3>Appointment History</h3>
         <ul className="list-group">
           {appointments.map((appointment) => (
+            // <li key={appointment.id} className="list-group-item">
+            //   {new Date(appointment.date).toDateString()}
+            //   {" - "}
+            //   {new Date(appointment.time).toLocaleTimeString()}
+            //   {/* Want to add the name of the doctor related to the appointment as well */}
+            // </li>
             <li key={appointment.id} className="list-group-item">
-              {new Date(appointment.date).toDateString()}
+              {new Date(appointment.dateTime).toDateString()}
               {" - "}
-              {new Date(appointment.time).toLocaleTimeString()}
+              {new Date(appointment.dateTime).toLocaleTimeString([], {
+                timeStyle: "short",
+              })}
+              {/* If the above locale timestring is found to be unsupported in some browsers, I can use this instead:
+              .toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})
+              .replace(/(:\d{2}| [AP]M)$/, "");
+                */}
               {/* Want to add the name of the doctor related to the appointment as well */}
             </li>
           ))}
